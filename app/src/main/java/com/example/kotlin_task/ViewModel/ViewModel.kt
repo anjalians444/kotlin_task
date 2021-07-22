@@ -8,14 +8,17 @@ import com.example.kotlin_task.response.ItemResponse
 
 
 class ViewModel(application: Application) : AndroidViewModel(application) {
-    private val articalRepository: ItemRepositry
-    private val articalResponseLiveData: LiveData<ItemResponse>
-    fun getArticalResponseLiveData(): LiveData<ItemResponse> {
-        return articalResponseLiveData
+    private var articalRepository: ItemRepositry? = null
+    private var articalResponseLiveData: LiveData<ItemResponse?>? = null
+
+    fun ViewModel(applications: Application) {
+      // super(applications)
+        applications
+        articalRepository = ItemRepositry()
+        articalResponseLiveData = articalRepository!!.getItemResponse()
     }
 
-    init {
-        articalRepository = ItemRepositry()
-        articalResponseLiveData = articalRepository.getItemResponse()
+    fun getArticalResponseLiveData(): LiveData<ItemResponse?>? {
+        return articalResponseLiveData
     }
 }

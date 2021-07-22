@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kotlin_task.Model.ItemModel
 import com.example.kotlin_task.R
-import com.vmate.thenewsapp.adapter.Adapterclass
 import java.util.ArrayList
 
 

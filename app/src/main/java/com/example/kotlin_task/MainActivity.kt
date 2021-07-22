@@ -16,6 +16,8 @@ import com.example.kotlin_task.ViewModel.ViewModel
 import java.util.*
 import java.util.EnumSet.of
 import java.util.List.of
+import java.util.Set.of
+import java.util.stream.Collector.of
 
 class MainActivity : AppCompatActivity(), Adapterclass.ItemClickListener {
     private var recyclerView: RecyclerView? = null
@@ -36,29 +38,29 @@ class MainActivity : AppCompatActivity(), Adapterclass.ItemClickListener {
         recyclerView = findViewById(R.id.recyclerView)
         progressBar = findViewById(R.id.progress)
         nodatafound = findViewById(R.id.noResultTv)
-        progressBar.setVisibility(View.VISIBLE)
+        progressBar?.setVisibility(View.VISIBLE)
         layoutManager = LinearLayoutManager(this@MainActivity)
-        recyclerView.setLayoutManager(layoutManager)
-        recyclerView.setHasFixedSize(true)
+        recyclerView?.setLayoutManager(layoutManager)
+        recyclerView?.setHasFixedSize(true)
         madapter = Adapterclass(this@MainActivity, articalModelArrayList, this)
-        recyclerView.setAdapter(madapter)
-        articalViewModel = ViewModelProvider.
-        of(this).get(ViewModel::class.java)
+        recyclerView?.setAdapter(madapter)
+        articalViewModel = ViewModelProvider.(this).get(ViewModel::class.java)
     }
 
     private val artical: Unit
         private get() {
-            articalViewModel.getArticalResponseLiveData().observe(this) { articalResponse ->
+            articalViewModel?.getArticalResponseLiveData()?.observe(this) { articalResponse ->
                 progressBar!!.visibility = View.VISIBLE
-                if (articalResponse != null && articalResponse.getArticalModels() != null && !articalResponse.getArticalModels()
+                if (articalResponse != null && articalResponse.getArticalModels()
+                    != null && !articalResponse.getArticalModels()!!
                         .isEmpty()
                 ) {
                     progressBar!!.visibility = View.GONE
                     nodatafound!!.visibility = View.GONE
                     val articalList: List<ItemModel> =
-                        articalResponse.getArticalModels()
+                        articalResponse.getArticalModels() as List<ItemModel>
                     articalModelArrayList.addAll(articalList)
-                    madapter.notifyDataSetChanged()
+                    madapter?.notifyDataSetChanged()
                 } else {
                     progressBar!!.visibility = View.GONE
                     nodatafound!!.visibility = View.VISIBLE
@@ -66,12 +68,13 @@ class MainActivity : AppCompatActivity(), Adapterclass.ItemClickListener {
             }
         }
 
-    fun onItemclick(item: ItemModel) {
-
-          Toast.makeText(this, "Clicked Title Name is : " +item.title, Toast.LENGTH_SHORT).show();
-    }
 
     companion object {
         private val TAG = MainActivity::class.java.simpleName
+    }
+
+    override fun onItemclick(item: ItemModel?) {
+        Toast.makeText(this, "Clicked Title Name is : " +item?.title, Toast.LENGTH_SHORT).show();
+
     }
 }

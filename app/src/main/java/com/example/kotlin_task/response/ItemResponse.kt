@@ -5,23 +5,27 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 public class ItemResponse {
-
-
-    @SerializedName("rows")
-    @Expose
-    private var itemModel: List<ItemModel?>? = null
-
-    fun getArticalModels(): List<ItemModel?>? {
+    fun getArticalModels():List<ItemModel?>?{
         return itemModel
+
     }
 
-    fun setArticalModels(itemModels: List<ItemModel?>?) {
-        this.itemModel = itemModels
-    }
+    companion object {
+        @SerializedName("rows")
+        @Expose
+        private var itemModel: List<ItemModel?>? = null
+        fun getArticalModels(): List<ItemModel?>? {
+            return itemModel
+        }
 
-    override fun toString(): String? {
-        return "ItemResponse{" +
-                "itemModels=" + itemModel +
-                '}'
+        fun setArticalModels(itemModels: List<ItemModel?>?) {
+            this.itemModel = itemModels
+        }
+
+        override fun toString(): String {
+            return "ItemResponse{" +
+                    "itemModels=" + itemModel +
+                    '}'
+        }
     }
 }

@@ -7,6 +7,7 @@ import retrofit2.http.GET
 
   interface Apirequest {
       fun enqueue(callback: Callback<ItemResponse?>)
+      abstract fun getTopHeadlines(): Any
 
       @get:GET("s/2iodh4vg0eortkl/facts.json")
         val topHeadlines: Call<Any?>?

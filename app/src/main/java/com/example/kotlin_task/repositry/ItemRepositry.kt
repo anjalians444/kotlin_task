@@ -11,17 +11,17 @@ import retrofit2.Response
 
 class ItemRepositry {
     private val TAG: String =
-     ItemRepositry::class.java.getSimpleName()
+      ItemRepositry::class.java.getSimpleName()
     private var apiRequest: Apirequest? = null
 
 
-    fun ArticalRepository() {
-        apiRequest = RetrofitRequest.getRetrofitInstance().create(Apirequest::class.java)
+    fun ItemRepositry() {
+        apiRequest = RetrofitRequest.getRetrofitInstance()?.create(Apirequest::class.java)
     }
 
     fun getItemResponse(): LiveData<ItemResponse?>? {
         val data: MutableLiveData<ItemResponse?> = MutableLiveData<ItemResponse?>()
-        apiRequest.getTopHeadlines()
+        apiRequest?.getTopHeadlines()
             .enqueue(object : Callback<ItemResponse?> {
                 override fun onResponse(
                     call: Call<ItemResponse?>,
@@ -39,3 +39,9 @@ class ItemRepositry {
         return data
     }
 }
+
+private fun Any?.enqueue(callback: Callback<ItemResponse?>) {
+
+}
+
+
